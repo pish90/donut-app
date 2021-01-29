@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Donut App</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Include Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+<body>
+<h1>Donut App</h1>
+<form action="#" th:action="@{/order}" th:object="${donutOrder}" method="POST">
+    <p>First Name: <input type="text" name="firstName" /></p>
+    <p>Surname: <input type="text" name="surname" /></p>
+    <p>Collection Date (dd/mm/yyyy): <input type="text" name="collectionDate" /></p>
+    <p>#Donut: <input type="number" name="numberOfDonuts" /></p>
+    <p><input type="submit" value="Place" /> </p>
+</form>
+
+<h1>Order History</h1>
+<div id="history">
+
+</div>
+
+<div th:fragment="orderList" th:unless="${#lists.isEmpty(orderList)}" class="history">
+    <table>
+        <thead>
+        <tr>
+            <th>Collection Date</th>
+            <th>First Name</th>
+            <th>Surname</th>
+            <th>Cinnamon Count</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="order : ${orderList}">
+            <td th:text="${order.collectionDate}">collectionDate</td>
+            <td th:text="${order.firstName}">firstName</td>
+            <td th:text="${order.surname}">surname</td>
+            <td th:text="${order.cinnamonCount}">country</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
